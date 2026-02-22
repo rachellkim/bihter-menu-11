@@ -1,315 +1,234 @@
 /* ========== RESET ========== */
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
 
 /* ========== GENEL ========== */
-body {
+body{
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #111;
+  min-height: 100vh;
+  position: relative;
   background: #f3efe9;
-  color: #222;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+a{ text-decoration: none; color: inherit; }
+
+/* ========== SAYFA ARKA PLANLARI (3 SAYFA) ========== */
+/* HTML’lerde body class’larını ver:
+   index.html:    <body class="page-home">
+   category.html: <body class="page-cat">
+   sub.html:      <body class="page-sub">
+*/
+
+body.page-home{
+  background: url("HOME_GORSEL_URL") center / cover no-repeat;
+}
+
+body.page-cat{
+  background: url("CATEGORY_GORSEL_URL") center / cover no-repeat;
+}
+
+body.page-sub{
+  background: url("SUB_GORSEL_URL") center / cover no-repeat;
+}
+
+/* “Wix gibi” beyaz tül (blur yok) */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.55); /* 0.45-0.65 arası ayarla */
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* ========== SAYFA ZEMİNİ ========== */
-.screen {
+.screen{
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 28px 16px;
+  display: block;
+  padding: 22px 14px 90px; /* alttaki footer/ikonlar için boşluk */
 }
 
-/* ========== ANA KART ========== */
-.card {
-  position: relative;
-  overflow: hidden;
-}
-
-/* flu arka plan */
-.card {
-  position: relative;
+/* ========== ANA KAPSAYICI (ARTIK “BÜYÜK BEYAZ KART” YOK) ========== */
+.card{
   width: 100%;
   max-width: 420px;
-  margin: 24px auto;
-  padding: 24px 20px;
-
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 28px;
-
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-
-  overflow: hidden;
+  margin: 0 auto;
+  padding: 10px 6px;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
 }
 
-.card {
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image:url("https://static.wixstatic.com/media/b9ef37_d2f5aa4eb3c54500a2af1030b1a315b6~mv2.jpg");
-  background-size:cover;
-  background-position:center;
-
-  /* iOS Safari uyumluluğ
-
-  opacity: .25;
-  transform: translateZ(0);     /* iOS render bug fix */
-  will-change: transform, filter;
-
-  z-index:0;
-  pointer-events:none;
-}
-
-.card > *{
-  position:relative;
-  z-index:1;
-}
 /* ========== LOGO & BAŞLIK ========== */
-.brand {
-  text-align: center;
-}
+.brand{ text-align: center; padding-top: 10px; }
 
-.logo {
-  width: 140px;          /* 🔽 küçülttük */
+.logo{
+  width: 170px;
   max-width: 70%;
-  margin: 0 auto 12px;
+  margin: 0 auto 10px;
   display: block;
 }
 
-.tagline {
-  font-size: 22px;
-  font-weight: 600;
-  margin: 0;
-}
-
-.divider {
-  width: 60%;
-  height: 2px;
-  background: rgba(0,0,0,0.15);
-  margin: 14px auto 22px;
-}
-
-/* ========== ANA KATEGORİ BUTONLARI ========== */
-.menu-buttons{
-  position: relative;
-  overflow: hidden;
-  border-radius: 22px;
-  padding: 18px 14px;
-  margin-top: 14px;
-  background: rgba(255,255,255,0.75);
-}
-
-/* wrap = yuvarlak kart */
-.menu-wrap{
-  position: relative;
-  margin-top: 14px;
-  padding: 16px;
-  border-radius: 22px;
-  overflow: hidden;
- background: rgba(255,255,255,0.45);
-}
-
-/* blur layer sadece arka planda */
-.menu-wrap .menu-bg{
-  position: absolute;
-  inset: 0;
-  background-image: url("https://static.wixstatic.com/media/b9ef37_ca9f847d9f1644eaac2d1ac54e30d2b1~mv2.jpeg");
-  background-size: cover;
-  background-position: center;
-  
-  opacity: .32;
-  transform: scale(1.03);
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* butonlar üstte ve düzgün */
-.menu-buttons{
-  position: relative;
-  z-index: 1;
-  display: grid;
-  gap: 14px;
-}
-.btn {
-  display: block;
-  background: rgba(150, 55, 55, 0.75);
-  color: #fff;
-  padding: 16px 14px;
-  border-radius: 12px;
+.tagline{
   font-size: 18px;
-  text-align: center;
-  letter-spacing: 0.5px;
-}
-
-.btn:active {
-  transform: scale(0.98);
-}
-
-/* ========== KATEGORİ HEADER ========== */
-.catHeader {
-  position: relative;
-  text-align: center;
-  margin-bottom: 14px;
-}
-
-.backLink {
-  position: absolute;
-  left: 0;
-  top: 2px;
   font-weight: 600;
-  color: rgba(0,0,0,0.6);
+  letter-spacing: 3px;
+  margin: 6px 0 8px;
 }
 
-.catTitle {
-  font-size: 20px;
-  letter-spacing: 2px;
-  margin: 6px 0 0;
+.divider{
+  width: 100%;
+  height: 2px;
+  background: rgba(0,0,0,0.55);
+  margin: 10px auto 16px;
 }
 
-/* ========== ÜRÜN LİSTESİ ========== */
-/* ========== ÜRÜN LİSTESİ ========== */
-.items{
+/* ========== ANA MENÜ BUTONLARI (örnekteki gibi düz/şeffaf kırmızı) ========== */
+.menu-buttons{
   display: grid;
   gap: 14px;
+  padding: 10px 0 6px;
 }
 
-/* === ÜRÜN KARTI (şeffaf + kenarlık) === */
-.item{
-  display: flex;
-  align-items: flex-start;         /* ✅ kaymayı bitirir */
-  justify-content: space-between;
-  gap: 14px;
+.btn{
+  display: block;
+  text-align: center;
+  padding: 18px 14px;
 
-  padding: 14px;
-  border-radius: 16px;
+  background: rgba(148, 55, 55, 0.65);
+  color: #fff;
 
-  background: rgba(255,255,255,0.55);        /* ✅ beyaz değil, şeffaf */
-  border: 1px solid rgba(0,0,0,0.10);        /* ✅ kenarlıklı */
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  border-radius: 0;              /* örnekte düz gibi */
+  letter-spacing: 4px;
+  font-size: 18px;
+  font-weight: 500;
 }
 
-/* Sol taraf */
-.itemMain{
-  min-width: 0;
+.btn:active{ transform: scale(0.99); }
+
+/* ========== KATEGORİ HEADER (üstteki gri/şeffaf panel) ========== */
+.catHeader{
+  max-width: 420px;
+  margin: 0 auto 14px;
+  padding: 16px 14px 14px;
+  border-radius: 22px;
+
+  background: rgba(255,255,255,0.45);
+  border: 1px solid rgba(0,0,0,0.12);
+
+  text-align: center;
+  position: relative;
 }
 
-.itemName{
-  font-size: 17px;
-  font-weight: 800;
+.backLink{
+  position: absolute;
+  left: 14px;
+  top: 18px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.65);
+}
+
+.catTitle{
   margin: 0;
+  font-size: 28px;
+  letter-spacing: 6px;
+  font-weight: 800;
+}
+
+.catSubtitle{
+  margin-top: 6px;
+  font-size: 14px;
+  letter-spacing: 6px;
+  color: rgba(0,0,0,0.8);
+}
+
+/* Header alt çizgi */
+.divider.small{
+  width: 100%;
+  height: 2px;
+  background: rgba(0,0,0,0.55);
+  margin: 12px auto 0;
+}
+
+/* ========== ÜRÜN LİSTESİ (kart değil, satır + çizgi) ========== */
+.items{
+  max-width: 420px;
+  margin: 0 auto;
+  display: grid;
+  gap: 0;
+}
+
+/* tek satır */
+.item{
+  display: grid;
+  grid-template-columns: 1fr auto 78px; /* sol / fiyat / foto */
+  align-items: center;
+  column-gap: 12px;
+
+  padding: 18px 8px;
+  border-bottom: 2px solid rgba(0,0,0,0.55);
+  background: transparent; /* örnekte arka plan yok */
+}
+
+/* Sol metin */
+.itemName{
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .itemDesc{
-  font-size: 13px;
-  color: rgba(0,0,0,0.55);
-  margin-top: 6px;
-  line-height: 1.25rem;
-}
-
-/* Sağ taraf (fiyat + foto) */
-.itemRight{
-  display: flex;
-  flex-direction: column;          /* ✅ fiyat üstte / foto altta */
-  align-items: flex-end;
-  gap: 8px;
-  flex-shrink: 0;
+  margin-top: 8px;
+  font-size: 14px;
+  color: rgba(0,0,0,0.85);
 }
 
 .price{
-  font-size: 18px;
-  font-weight: 900;
+  font-size: 22px;
+  font-weight: 800;
   white-space: nowrap;
+  align-self: start;
+  margin-top: 4px;
 }
 
-/* Foto */
-.price{
-  font-size: 18px;
-  font-weight: 900;
-  white-space: nowrap;
-}
-
-/* Foto */
+/* Foto (kayma olmasın diye sabit) */
 .thumb{
-  width: 64px;
-  height: 64px;
-  border-radius: 12px;
+  width: 78px;
+  height: 58px;
   object-fit: cover;
-  background: rgba(0,0,0,0.08);
+  border-radius: 0;          /* örnekte köşeler daha “düz” */
   display: block;
+  justify-self: end;
 }
-
-
 
 /* ========== FOOTER ========== */
-.footer {
+.footer{
+  max-width: 420px;
+  margin: 16px auto 0;
   display: flex;
   justify-content: space-between;
-  padding-top: 10px;
-  margin-top: 10px;
-  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 12px;
+  border-top: 2px solid rgba(0,0,0,0.35);
 }
 
-.icon-btn {
-  font-size: 24px;
+.icon-btn{
+  font-size: 22px;
   padding: 10px 14px;
 }
 
-/* ========== YUKARI ÇIK BUTONU ========== */
-.toTop {
+/* ========== YUKARI ÇIK ========== */
+.toTop{
   position: fixed;
   right: 18px;
-  bottom: 18px;
-  width: 44px;
-  height: 44px;
+  bottom: 88px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   border: 0;
   background: rgba(255,255,255,0.95);
   box-shadow: 0 10px 24px rgba(0,0,0,0.18);
-  font-size: 22px;
+  font-size: 24px;
   cursor: pointer;
 }
-
-/* === ÜRÜN FOTOĞRAFI FIX === */
-.item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-
-.itemRight {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.thumb {
-  width: 56px;
-  height: 56px;
-  object-fit: cover;
-  border-radius: 8px;
-  flex-shrink: 0;
-  display: block;
-}
-body{ position: relative; }
-body.page-home::before{
-  content:"";
-  position: fixed;
-  inset: 0;
-  background: rgba(255,255,255,0.55);  /* 0.45-0.70 arası oynayabilirsin */
-  z-index: -1;
-}
-
