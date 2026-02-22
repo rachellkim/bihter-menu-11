@@ -63,9 +63,7 @@ a {
   background-size:cover;
   background-position:center;
 
-  /* iOS Safari uyumluluğu */
-  -webkit-filter: blur(10px);
-  filter: blur(10px);
+  /* iOS Safari uyumluluğ
 
   opacity: .25;
   transform: translateZ(0);     /* iOS render bug fix */
@@ -131,8 +129,7 @@ a {
   background-image: url("https://static.wixstatic.com/media/b9ef37_ca9f847d9f1644eaac2d1ac54e30d2b1~mv2.jpeg");
   background-size: cover;
   background-position: center;
-   -webkit-filter: blur(8px);
-  filter: blur(8px);
+  
   opacity: .32;
   transform: scale(1.03);
   z-index: 0;
@@ -183,64 +180,78 @@ a {
 }
 
 /* ========== ÜRÜN LİSTESİ ========== */
-.items {
+/* ========== ÜRÜN LİSTESİ ========== */
+.items{
   display: grid;
   gap: 14px;
 }
 
-/* === ÜRÜN KARTI === */
-.item {
-  display: grid;
-  grid-template-columns: 1fr auto;
+/* === ÜRÜN KARTI (şeffaf + kenarlık) === */
+.item{
+  display: flex;
+  align-items: flex-start;         /* ✅ kaymayı bitirir */
+  justify-content: space-between;
   gap: 14px;
+
   padding: 14px;
-  background: #fff;
   border-radius: 16px;
+
+  background: rgba(255,255,255,0.55);        /* ✅ beyaz değil, şeffaf */
+  border: 1px solid rgba(0,0,0,0.10);        /* ✅ kenarlıklı */
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-  border: 1px solid rgba(0,0,0,0.06);
 }
 
-/* === ÜRÜN BİLGİ === */
-.itemMain {
+/* Sol taraf */
+.itemMain{
   min-width: 0;
 }
 
-.itemName {
+.itemName{
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 800;
   margin: 0;
 }
 
-.itemDesc {
+.itemDesc{
   font-size: 13px;
   color: rgba(0,0,0,0.55);
   margin-top: 6px;
   line-height: 1.25rem;
 }
 
-/* === SAĞ TARAF (FİYAT + FOTO) === */
-.itemRight {
-  display: grid;
-  align-content: start;
-  justify-items: end;
+/* Sağ taraf (fiyat + foto) */
+.itemRight{
+  display: flex;
+  flex-direction: column;          /* ✅ fiyat üstte / foto altta */
+  align-items: flex-end;
   gap: 8px;
-  min-width: 96px;
+  flex-shrink: 0;
 }
 
-.price {
-  font-size: 16px;
-  font-weight: 800;
+.price{
+  font-size: 18px;
+  font-weight: 900;
   white-space: nowrap;
 }
 
-/* 🔥 FOTOĞRAF – DAHA BÜYÜK */
-.thumb {
-  width: 88px;
-  height: 88px;
+/* Foto */
+.price{
+  font-size: 18px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* Foto */
+.thumb{
+  width: 64px;
+  height: 64px;
   border-radius: 12px;
   object-fit: cover;
   background: rgba(0,0,0,0.08);
+  display: block;
 }
+
+
 
 /* ========== FOOTER ========== */
 .footer {
@@ -293,5 +304,12 @@ a {
   flex-shrink: 0;
   display: block;
 }
-
+body{ position: relative; }
+body.page-home::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.55);  /* 0.45-0.70 arası oynayabilirsin */
+  z-index: -1;
+}
 
