@@ -3,18 +3,15 @@
   box-sizing: border-box;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-}
+html, body { height: 100%; }
 
-/* ========== GENEL ========== */
-body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: #f3efe9;
+body{
+  font-family: Avenir, "Avenir Next", "Nunito Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color: #222;
+  background: #f3efe9;
+  position: relative;
+  min-height: 100vh;
 }
-
 a {
   text-decoration: none;
   color: inherit;
@@ -29,53 +26,17 @@ a {
 }
 
 /* ========== ANA KART ========== */
-.card {
-  position: relative;
-  overflow: hidden;
-}
-
-/* flu arka plan */
-.card {
-  position: relative;
+.card{
   width: 100%;
   max-width: 420px;
   margin: 24px auto;
   padding: 24px 20px;
 
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255,255,255,0.35);  /* şeffaf görünüm */
+  border: 1px solid rgba(0,0,0,0.10);
   border-radius: 28px;
 
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-
-  overflow: hidden;
-}
-
-.card {
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image:url("https://static.wixstatic.com/media/b9ef37_d2f5aa4eb3c54500a2af1030b1a315b6~mv2.jpg");
-  background-size:cover;
-  background-position:center;
-
-  /* iOS Safari uyumluluÄŸ
-
-  opacity: .25;
-  transform: translateZ(0);     /* iOS render bug fix */
-  will-change: transform, filter;
-
-  z-index:0;
-  pointer-events:none;
-}
-
-.card > *{
-  position:relative;
-  z-index:1;
 }
 /* ========== LOGO & BAÅLIK ========== */
 .brand {
@@ -89,11 +50,11 @@ a {
   display: block;
 }
 
-.tagline {
-  font-size: 22px;
-  font-weight: 600;
-  margin: 0;
+.tagline{
+  font-size: 18px;
+  letter-spacing: 3px;
 }
+
 
 .divider {
   width: 60%;
@@ -173,11 +134,12 @@ a {
   color: rgba(0,0,0,0.6);
 }
 
-.catTitle {
-  font-size: 20px;
-  letter-spacing: 2px;
-  margin: 6px 0 0;
+.catTitle{
+  font-size: 22px;
+  letter-spacing: 3px;
+  font-weight: 800;
 }
+
 
 /* ========== ÃœRÃœN LÄ°STESÄ° ========== */
 /* ========== ÃœRÃœN LÄ°STESÄ° ========== */
@@ -206,10 +168,9 @@ a {
   min-width: 0;
 }
 
-.itemName{
-  font-size: 17px;
+itemName{
+  font-size: 16px;
   font-weight: 800;
-  margin: 0;
 }
 
 .itemDesc{
@@ -229,11 +190,9 @@ a {
 }
 
 .price{
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 900;
-  white-space: nowrap;
 }
-
 /* Foto */
 .price{
   font-size: 18px;
@@ -305,10 +264,37 @@ a {
   display: block;
 }
 body{ position: relative; }
-body.page-home::before{
+body.page-home::before,
+body.page-cat::before,
+body.page-sub::before{
   content:"";
   position: fixed;
   inset: 0;
-  background: rgba(255,255,255,0.55);  /* 0.45-0.70 arasÄ± oynayabilirsin */
-  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  -webkit-filter: blur(6px);
+  filter: blur(6px);
+
+  transform: scale(1.05);       /* blur kenarlarını gizler */
+  z-index: -2;
 }
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.55); /* 0.45-0.65 arası oynat */
+  z-index: -1;
+  pointer-events: none;
+}
+body.page-home::before{
+  background-image: url("https://static.wixstatic.com/media/b9ef37_d2f5aa4eb3c54500a2af1030b1a315b6~mv2.jpg");
+}
+body.page-cat::before{
+  background-image: url("CATEGORY_GORSEL_URL");
+}
+body.page-sub::before{
+  background-image: url("SUB_GORSEL_URL");
+}
+
