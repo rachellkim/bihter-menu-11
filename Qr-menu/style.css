@@ -1,234 +1,314 @@
 /* ========== RESET ========== */
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
 /* ========== GENEL ========== */
-body{
+body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: #111;
-  min-height: 100vh;
-  position: relative;
   background: #f3efe9;
+  color: #222;
 }
 
-a{ text-decoration: none; color: inherit; }
-
-/* ========== SAYFA ARKA PLANLARI (3 SAYFA) ========== */
-/* HTML’lerde body class’larını ver:
-   index.html:    <body class="page-home">
-   category.html: <body class="page-cat">
-   sub.html:      <body class="page-sub">
-*/
-
-body.page-home{
-  background: url("HOME_GORSEL_URL") center / cover no-repeat;
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-body.page-cat{
-  background: url("CATEGORY_GORSEL_URL") center / cover no-repeat;
-}
-
-body.page-sub{
-  background: url("SUB_GORSEL_URL") center / cover no-repeat;
-}
-
-/* “Wix gibi” beyaz tül (blur yok) */
-body::before{
-  content:"";
-  position: fixed;
-  inset: 0;
-  background: rgba(255,255,255,0.55); /* 0.45-0.65 arası ayarla */
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* ========== SAYFA ZEMİNİ ========== */
-.screen{
+/* ========== SAYFA ZEMÄ°NÄ° ========== */
+.screen {
   min-height: 100vh;
-  display: block;
-  padding: 22px 14px 90px; /* alttaki footer/ikonlar için boşluk */
+  display: grid;
+  place-items: center;
+  padding: 28px 16px;
 }
 
-/* ========== ANA KAPSAYICI (ARTIK “BÜYÜK BEYAZ KART” YOK) ========== */
-.card{
+/* ========== ANA KART ========== */
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* flu arka plan */
+.card {
+  position: relative;
   width: 100%;
   max-width: 420px;
-  margin: 0 auto;
-  padding: 10px 6px;
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
+  margin: 24px auto;
+  padding: 24px 20px;
+
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 28px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+
+  overflow: hidden;
 }
 
-/* ========== LOGO & BAŞLIK ========== */
-.brand{ text-align: center; padding-top: 10px; }
+.card {
+  position: relative;
+  overflow: hidden;
+}
 
-.logo{
-  width: 170px;
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:url("https://static.wixstatic.com/media/b9ef37_d2f5aa4eb3c54500a2af1030b1a315b6~mv2.jpg");
+  background-size:cover;
+  background-position:center;
+
+  /* iOS Safari uyumluluÄŸ
+
+  opacity: .25;
+  transform: translateZ(0);     /* iOS render bug fix */
+  will-change: transform, filter;
+
+  z-index:0;
+  pointer-events:none;
+}
+
+.card > *{
+  position:relative;
+  z-index:1;
+}
+/* ========== LOGO & BAÅLIK ========== */
+.brand {
+  text-align: center;
+}
+
+.logo {
+  width: 140px;          /* ğŸ”½ kÃ¼Ã§Ã¼lttÃ¼k */
   max-width: 70%;
-  margin: 0 auto 10px;
+  margin: 0 auto 12px;
   display: block;
 }
 
-.tagline{
-  font-size: 18px;
+.tagline {
+  font-size: 22px;
   font-weight: 600;
-  letter-spacing: 3px;
-  margin: 6px 0 8px;
+  margin: 0;
 }
 
-.divider{
-  width: 100%;
+.divider {
+  width: 60%;
   height: 2px;
-  background: rgba(0,0,0,0.55);
-  margin: 10px auto 16px;
+  background: rgba(0,0,0,0.15);
+  margin: 14px auto 22px;
 }
 
-/* ========== ANA MENÜ BUTONLARI (örnekteki gibi düz/şeffaf kırmızı) ========== */
+/* ========== ANA KATEGORÄ° BUTONLARI ========== */
 .menu-buttons{
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  padding: 18px 14px;
+  margin-top: 14px;
+  background: rgba(255,255,255,0.75);
+}
+
+/* wrap = yuvarlak kart */
+.menu-wrap{
+  position: relative;
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 22px;
+  overflow: hidden;
+ background: rgba(255,255,255,0.45);
+}
+
+/* blur layer sadece arka planda */
+.menu-wrap .menu-bg{
+  position: absolute;
+  inset: 0;
+  background-image: url("https://static.wixstatic.com/media/b9ef37_ca9f847d9f1644eaac2d1ac54e30d2b1~mv2.jpeg");
+  background-size: cover;
+  background-position: center;
+  
+  opacity: .32;
+  transform: scale(1.03);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* butonlar Ã¼stte ve dÃ¼zgÃ¼n */
+.menu-buttons{
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 14px;
-  padding: 10px 0 6px;
 }
-
-.btn{
+.btn {
   display: block;
-  text-align: center;
-  padding: 18px 14px;
-
-  background: rgba(148, 55, 55, 0.65);
+  background: rgba(150, 55, 55, 0.75);
   color: #fff;
-
-  border-radius: 0;              /* örnekte düz gibi */
-  letter-spacing: 4px;
+  padding: 16px 14px;
+  border-radius: 12px;
   font-size: 18px;
-  font-weight: 500;
-}
-
-.btn:active{ transform: scale(0.99); }
-
-/* ========== KATEGORİ HEADER (üstteki gri/şeffaf panel) ========== */
-.catHeader{
-  max-width: 420px;
-  margin: 0 auto 14px;
-  padding: 16px 14px 14px;
-  border-radius: 22px;
-
-  background: rgba(255,255,255,0.45);
-  border: 1px solid rgba(0,0,0,0.12);
-
   text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* ========== KATEGORÄ° HEADER ========== */
+.catHeader {
   position: relative;
+  text-align: center;
+  margin-bottom: 14px;
 }
 
-.backLink{
+.backLink {
   position: absolute;
-  left: 14px;
-  top: 18px;
+  left: 0;
+  top: 2px;
   font-weight: 600;
-  color: rgba(0,0,0,0.65);
+  color: rgba(0,0,0,0.6);
 }
 
-.catTitle{
-  margin: 0;
-  font-size: 28px;
-  letter-spacing: 6px;
-  font-weight: 800;
+.catTitle {
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin: 6px 0 0;
 }
 
-.catSubtitle{
-  margin-top: 6px;
-  font-size: 14px;
-  letter-spacing: 6px;
-  color: rgba(0,0,0,0.8);
-}
-
-/* Header alt çizgi */
-.divider.small{
-  width: 100%;
-  height: 2px;
-  background: rgba(0,0,0,0.55);
-  margin: 12px auto 0;
-}
-
-/* ========== ÜRÜN LİSTESİ (kart değil, satır + çizgi) ========== */
+/* ========== ÃœRÃœN LÄ°STESÄ° ========== */
+/* ========== ÃœRÃœN LÄ°STESÄ° ========== */
 .items{
-  max-width: 420px;
-  margin: 0 auto;
   display: grid;
-  gap: 0;
+  gap: 14px;
 }
 
-/* tek satır */
+/* === ÃœRÃœN KARTI (ÅŸeffaf + kenarlÄ±k) === */
 .item{
-  display: grid;
-  grid-template-columns: 1fr auto 78px; /* sol / fiyat / foto */
-  align-items: center;
-  column-gap: 12px;
+  display: flex;
+  align-items: flex-start;         /* âœ… kaymayÄ± bitirir */
+  justify-content: space-between;
+  gap: 14px;
 
-  padding: 18px 8px;
-  border-bottom: 2px solid rgba(0,0,0,0.55);
-  background: transparent; /* örnekte arka plan yok */
+  padding: 14px;
+  border-radius: 16px;
+
+  background: rgba(255,255,255,0.55);        /* âœ… beyaz deÄŸil, ÅŸeffaf */
+  border: 1px solid rgba(0,0,0,0.10);        /* âœ… kenarlÄ±klÄ± */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
 
-/* Sol metin */
+/* Sol taraf */
+.itemMain{
+  min-width: 0;
+}
+
 .itemName{
+  font-size: 17px;
+  font-weight: 800;
   margin: 0;
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: 1px;
 }
 
 .itemDesc{
-  margin-top: 8px;
-  font-size: 14px;
-  color: rgba(0,0,0,0.85);
+  font-size: 13px;
+  color: rgba(0,0,0,0.55);
+  margin-top: 6px;
+  line-height: 1.25rem;
+}
+
+/* SaÄŸ taraf (fiyat + foto) */
+.itemRight{
+  display: flex;
+  flex-direction: column;          /* âœ… fiyat Ã¼stte / foto altta */
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .price{
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 18px;
+  font-weight: 900;
   white-space: nowrap;
-  align-self: start;
-  margin-top: 4px;
 }
 
-/* Foto (kayma olmasın diye sabit) */
-.thumb{
-  width: 78px;
-  height: 58px;
-  object-fit: cover;
-  border-radius: 0;          /* örnekte köşeler daha “düz” */
-  display: block;
-  justify-self: end;
+/* Foto */
+.price{
+  font-size: 18px;
+  font-weight: 900;
+  white-space: nowrap;
 }
+
+/* Foto */
+.thumb{
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: rgba(0,0,0,0.08);
+  display: block;
+}
+
+
 
 /* ========== FOOTER ========== */
-.footer{
-  max-width: 420px;
-  margin: 16px auto 0;
+.footer {
   display: flex;
   justify-content: space-between;
-  padding-top: 12px;
-  border-top: 2px solid rgba(0,0,0,0.35);
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(0,0,0,0.08);
 }
 
-.icon-btn{
-  font-size: 22px;
+.icon-btn {
+  font-size: 24px;
   padding: 10px 14px;
 }
 
-/* ========== YUKARI ÇIK ========== */
-.toTop{
+/* ========== YUKARI Ã‡IK BUTONU ========== */
+.toTop {
   position: fixed;
   right: 18px;
-  bottom: 88px;
-  width: 56px;
-  height: 56px;
+  bottom: 18px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 0;
   background: rgba(255,255,255,0.95);
   box-shadow: 0 10px 24px rgba(0,0,0,0.18);
-  font-size: 24px;
+  font-size: 22px;
   cursor: pointer;
+}
+
+/* === ÃœRÃœN FOTOÄRAFI FIX === */
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.itemRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.thumb {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  display: block;
+}
+body{ position: relative; }
+body.page-home::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.55);  /* 0.45-0.70 arasÄ± oynayabilirsin */
+  z-index: -1;
 }
