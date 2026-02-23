@@ -270,171 +270,34 @@ html, body, button, input, textarea, select, a{
 }
 
 /* --- HEADER ÇAKIŞMA KESİN FIX (EN ALTA EKLE) --- */
-.page-cat .catHeader,
-.page-sub .catHeader {
-  display: grid !important;
-  grid-template-columns: max-content 1fr max-content !important;
-  align-items: center !important;
-  gap: 10px !important;
-
-  /* üstten nefes + safe area */
-  padding-top: calc(12px + env(safe-area-inset-top)) !important;
-  padding-left: 16px !important;
-  padding-right: 16px !important;
-  padding-bottom: 10px !important;
-
-  position: relative !important;
-}
-
-/* backLink kesinlikle absolute olmasın */
-.page-cat .catHeader .backLink,
-.page-sub .catHeader .backLink {
-  position: static !important;
-  white-space: nowrap !important;
-  line-height: 1.1 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Başlık ortalı ve taşmayı kontrol ediyoruz */
-.page-cat .catHeader .catTitle,
-.page-sub .catHeader .catTitle,
-.page-cat .catHeader #catTitle,
-.page-sub .catHeader #catTitle {
-  margin: 0 !important;
-  padding: 0 !important;
-  text-align: center !important;
-  line-height: 1.15 !important;
-
-  /* çok uzun başlıkta çakışma yerine düzgün kısalsın */
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-}
-
-/* Sağ tarafta "boş kolon" gibi davranacak küçük spacer */
-.page-cat .catHeader::after,
-.page-sub .catHeader::after {
-  content: "" !important;
-  width: 1px !important;
-  height: 1px !important;
-}
-
-/* ===== MOBILDE ÇAKIŞMAYI SIFIRLAYAN SERT FIX (EN ALTA) ===== */
-@media (max-width: 520px) {
-  .page-cat .catHeader,
-  .page-sub .catHeader {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    grid-template-rows: auto auto auto !important; /* 🔥 KRİTİK */
-    gap: 6px !important;
-  }
-
-  .page-cat .catHeader .divider,
-  .page-sub .catHeader .divider {
-    grid-row: 3 !important;
-  }
-}
-
-  /* Geri link: 1. satır */
-  .page-cat .catHeader .backLink,
-  .page-sub .catHeader .backLink {
-    grid-row: 1 !important;
-    grid-column: 1 !important;
-
-    position: static !important;
-    display: inline-block !important;
-    white-space: nowrap !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-    line-height: 1.1 !important;
-  }
-
-  /* Başlık: 2. satır */
-  .page-cat .catHeader .catTitle,
-  .page-sub .catHeader .catTitle,
-  .page-cat .catHeader #catTitle,
-  .page-sub .catHeader #catTitle {
-    grid-row: 2 !important;
-    grid-column: 1 !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    text-align: left !important;   /* mobilde en temiz */
-    line-height: 1.15 !important;
-
-    /* Uzunsa taşmasın */
-    overflow-wrap: anywhere !important;
-    white-space: normal !important;
-  }
-
-  /* Divider header içindeyse, alta insin ve tek satır kaplasın */
-  .page-cat .catHeader .divider,
-  .page-sub .catHeader .divider {
-    grid-row: 3 !important;
-    grid-column: 1 !important;
-  }
-
-  /* Absolute/top/transform ile tekrar üstte bindiren kuralları öldür */
-  .page-cat .backLink,
-  .page-sub .backLink {
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    transform: none !important;
-  }
-}
-
-/* ===== TAMAMEN BLOK HEADER (MOBIL) ===== */
+/* ===== MOBIL HEADER FINAL FIX ===== */
 @media (max-width: 600px) {
 
-  /* header'ı grid/flex'ten kurtar */
   .page-cat .catHeader,
   .page-sub .catHeader {
     display: block !important;
-    width: 100% !important;
-    padding: 8px 16px 4px !important;
+    padding: 10px 16px 6px !important;
   }
 
-  /* geri link tek satır */
-  .page-cat .catHeader .backLink,
-  .page-sub .catHeader .backLink {
+  /* ← Menü : TEK SATIR */
+  .page-cat .backLink,
+  .page-sub .backLink {
     display: block !important;
+    margin-bottom: 6px !important;
     font-size: 14px !important;
-    text-align: left !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    opacity: .75 !important;
-    white-space: nowrap !important;
-    line-height: 1.2 !important;
+    opacity: .7 !important;
   }
 
-  /* başlık tek satır
-     - taşarsa sarar, üst üste binmez
-     - ortalanabilir */
-  .page-cat .catHeader .catTitle,
-  .page-sub .catHeader .catTitle,
+  /* Başlık: ALT SATIR + ORTALI */
+  .page-cat .catTitle,
+  .page-sub .catTitle,
   .page-cat #catTitle,
   .page-sub #catTitle {
     display: block !important;
-    font-size: 20px !important;
-    margin-top: 4px !important;
     text-align: center !important;
-    white-space: normal !important;
-    word-break: break-word !important;
+    font-size: 20px !important;
     line-height: 1.3 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
-
-  /* Eğer varsa divider header dışında */
-  .page-cat .catHeader .divider,
-  .page-sub .catHeader .divider {
-    display: none !important;
-  }
-}
-
-.page-cat .catHeader {
-  outline: 3px dashed green !important;
 }
