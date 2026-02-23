@@ -328,13 +328,11 @@ body.page-cat::before{
   .hero{ height: 130px; }
 }
 /* ===== SUB PAGE: KART UZUN / FULL GÖRÜNSÜN ===== */
-.page-sub .screen{
-  place-items: start center;   /* ortalamayı kapat, yukarı al */
-  padding-top: 18px;
+body.page-sub .screen{
+  display: block;          /* center iptal */
+  padding-top: 24px;
 }
 
-.page-sub .card.wide{
-  min-height: calc(100vh - 36px); /* ekranı doldursun */
-  display: flex;
-  flex-direction: column;
+body.page-sub .card{
+  min-height: calc(100vh - 48px); /* 🔥 kart uzar */
 }
