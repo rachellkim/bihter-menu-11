@@ -48,7 +48,7 @@ body.page-home::before{
   background-image: url("https://static.wixstatic.com/media/b9ef37_d2f5aa4eb3c54500a2af1030b1a315b6~mv2.jpg");
 }
 body.page-sub::before{
-  background-image: url("https://static.wixstatic.com/media/b9ef37_c915c3ee21d44b08ab08fd3665a2f04c~mv2.jpeg");
+  background-image: var(--sub-bg, none);
 }
 /* BUNU senin category görsel linkinle değiştir */
 body.page-cat::before{
@@ -220,4 +220,20 @@ body.page-cat::before{
   box-shadow: 0 10px 24px rgba(0,0,0,0.18);
   font-size: 22px;
   cursor: pointer;
+}
+/* SUB sayfası üst görsel (hero) - taşmayı bitirir */
+.hero{
+  width: 100%;
+  max-width: 100%;
+  height: auto;          /* oran koru */
+  display: block;
+  margin: 0 auto 12px;
+  border-radius: 18px;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Çok uzun dikey foto gelirse: kartı bozmasın */
+.hero.is-visible{
+  max-height: 320px;     /* istersen 260-380 arası oynat */
 }
