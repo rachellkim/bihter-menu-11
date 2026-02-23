@@ -10,6 +10,21 @@ body{
   min-height: 100vh;
 }
 
+/* === ANA SAYFA LOGO (AŞK-I BİHTER) === */
+.page-home .logo{
+  width: 200px;      
+  max-width: 85%;
+  height: auto;
+  margin: 0 auto 14px;
+   filter: drop-shadow(0 8px 18px rgba(0,0,0,0.15));
+}
+
+@media (max-width: 480px){
+  .page-home .logo{
+    width: 170px;
+  }
+}
+
 a{ text-decoration: none; color: inherit; }
 
 /* ========== SAYFA ARKAPLAN (3 SAYFA) ========== */
