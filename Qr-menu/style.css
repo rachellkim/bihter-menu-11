@@ -341,3 +341,4 @@ body.page-cat::before{
 .catTitle{
   font-family: var(--font);
 }
+   body.page-home { background: red !important; }
