@@ -375,3 +375,16 @@ body.page-cat .screen{
   padding-top: 28px;
   padding-bottom: 28px;
 }
+
+/* ✅ SUB sayfasında kart DİKİNE UZASIN */
+body.page-sub .card{
+  min-height: auto;
+  height: auto;
+  padding-bottom: 32px; /* altta ferahlık */
+}
+
+/* Kart içindeki butonlar arttıkça kart uzasın */
+body.page-sub .menu-buttons,
+body.page-sub #subs{
+  width: 100%;
+}
