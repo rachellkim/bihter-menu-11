@@ -1,25 +1,33 @@
+/* =========================================================
+   BIHTER MENU — TEMİZ / DÜZENLİ style.css
+   - Bozuk @media / fazla } yok
+   - Header çakışmasını kökten çözer (Menü üst satır, başlık alt satır)
+   ========================================================= */
+
 /* ========== RESET ========== */
-*{ box-sizing: border-box; }
-html, body{ height: 100%; margin: 0; padding: 0; }
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; padding: 0; }
+
+/* ========== FONT ========== */
+:root{
+  --font: "Avenir Next", Avenir, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --overlay: rgba(255,255,255,0.55);
+  --card-bg: rgba(255,255,255,0.35);
+  --border: rgba(0,0,0,0.10);
+  --shadow: rgba(0,0,0,0.10);
+}
+
+html, body, button, input, textarea, select, a{
+  font-family: var(--font) !important;
+  font-weight: 400;
+}
 
 body{
-  font-family: var(--font);
   color: #222;
   background: #f3efe9;
   position: relative;
   min-height: 100vh;
 }
-
-/* === ANA SAYFA LOGO (AŞK-I BİHTER) === */
-.page-home .logo{
-  width: 240px !important;      
-  max-width: 90%;
-  height: auto;
-  margin: 0 auto 18px;
-   filter: drop-shadow(0 8px 18px rgba(0,0,0,0.15));
-  display: block;
-}
-
 
 a{ text-decoration: none; color: inherit; }
 
@@ -33,10 +41,8 @@ body.page-sub::before{
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-
   -webkit-filter: blur(6px);
   filter: blur(6px);
-
   transform: scale(1.05);
   z-index: -2;
 }
@@ -45,7 +51,7 @@ body::after{
   content:"";
   position: fixed;
   inset: 0;
-  background: rgba(255,255,255,0.55);
+  background: var(--overlay);
   z-index: -1;
   pointer-events: none;
 }
@@ -54,10 +60,12 @@ body::after{
 body.page-home::before{
   background-image: url("https://static.wixstatic.com/media/b9ef37_d2f5aa4eb3c54500a2af1030b1a315b6~mv2.jpg");
 }
+
 body.page-sub::before{
   background-image: var(--sub-bg, none);
 }
-/* BUNU senin category görsel linkinle değiştir */
+
+/* Kategori arkaplanı (istersen gerçek URL koy) */
 body.page-cat::before{
   background-image: url("CATEGORY_GORSEL_URL");
 }
@@ -77,9 +85,9 @@ body.page-cat::before{
   padding: 22px 18px;
   border-radius: 28px;
 
-  background: rgba(255,255,255,0.35);
-  border: 1px solid rgba(0,0,0,0.10);
-  box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: 0 14px 40px var(--shadow);
 
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -97,9 +105,19 @@ body.page-cat::before{
   display: block;
 }
 
+/* Ana sayfa logo (Aşk-ı Bihter) */
+.page-home .logo{
+  width: 240px !important;
+  max-width: 90%;
+  height: auto;
+  margin: 0 auto 18px;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.15));
+  display: block;
+}
+
 .tagline{
   font-size: 18px;
-  letter-spacing: 2px; /* 3 -> 2 */
+  letter-spacing: 2px;
   font-weight: 400;
 }
 
@@ -115,24 +133,64 @@ body.page-cat::before{
   margin: 12px auto 0;
 }
 
-/* ========== KATEGORİ HEADER ========== */
-/* ========== MOBIL HEADER FIX ========== */
+/* =========================================================
+   KATEGORİ / SUB HEADER — ÇAKIŞMAYI KÖKTEN ÇÖZER
+   Menü üst satır, başlık alt satır (her ekran)
+   ========================================================= */
+.page-cat .catHeader,
+.page-sub .catHeader{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 
-
-.backLink {
-  display: block !important;
+  padding: calc(10px + env(safe-area-inset-top)) 16px 6px;
 }
 
-
-.catTitle {
-  display: block !important;
+.page-cat .backLink,
+.page-sub .backLink{
+  align-self: flex-start;
+  display: block;        /* asla başlıkla aynı satıra gelmesin */
+  position: static;
+  white-space: nowrap;
+  font-size: 13px;
+  opacity: .75;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
 }
+
+.page-cat .catTitle,
+.page-cat #catTitle,
+.page-sub .catTitle,
+.page-sub #catTitle{
+  display: block;        /* asla backLink ile birleşmesin */
+  margin: 0;
+  padding: 0;
+
+  text-align: center;
+  font-size: 18px;       /* genel boyut */
+  letter-spacing: 1px;
+  line-height: 1.2;
+
+  /* uzunsa 2 satıra düşsün, çakışmasın */
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* Mobilde biraz daha küçült */
+@media (max-width: 600px){
+  .page-cat .catTitle,
+  .page-cat #catTitle,
+  .page-sub .catTitle,
+  .page-sub #catTitle{
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
 }
 
 /* ========== ANA BUTONLAR (HOME / SUB) ========== */
-.menu-wrap{
-  margin-top: 14px;
-}
+.menu-wrap{ margin-top: 14px; }
 
 .menu-buttons{
   display: grid;
@@ -160,29 +218,36 @@ body.page-cat::before{
   grid-template-columns: 1fr auto 64px; /* isim | fiyat | foto */
   align-items: center;
   gap: 12px;
- font-size: 15px;      
+  font-size: 15px;
   padding: 14px;
   border-radius: 16px;
 
-  background: rgba(255,255,255,0.35);
-  border: 1px solid rgba(0,0,0,0.10);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
 
 .itemMain{ min-width: 0; }
+
 .itemName{
-  font-size: 15px; 
-  font-weight: 650;  
+  font-size: 15px;
+  font-weight: 650;
   margin: 0;
 }
-.itemDesc{ font-size: 13px; opacity: .7; margin-top: 6px; line-height: 1.25rem; }
+
+.itemDesc{
+  font-size: 13px;
+  opacity: .7;
+  margin-top: 6px;
+  line-height: 1.25rem;
+}
 
 /* JS’te sağ tarafta wrapper var: itemRight */
 .itemRight{ display: contents; }
 
 .price{
-  font-size: 16px;  
-  font-weight: 500;  
+  font-size: 16px;
+  font-weight: 500;
   opacity: .9;
   white-space: nowrap;
 }
@@ -225,69 +290,28 @@ body.page-cat::before{
   font-size: 22px;
   cursor: pointer;
 }
-/* SUB sayfası üst görsel (hero) - taşmayı bitirir */
+
+/* ========== SUB HERO ========== */
 .hero{
   width: 100%;
   max-width: 100%;
-  height: auto;          /* oran koru */
+  height: auto;
   display: block;
   margin: 0 auto 12px;
   border-radius: 18px;
   object-fit: cover;
   object-position: center;
-   font-family: var(--font);
 }
 
-/* Çok uzun dikey foto gelirse: kartı bozmasın */
 .hero.is-visible{
-  max-height: 320px;     /* istersen 260-380 arası oynat */
+  max-height: 320px;
 }
 
+/* Font garantisi (butonlar / başlıklar) */
 .btn,
 .menu-buttons,
 .menu-wrap,
 .heroText,
-.catTitle {
+.catTitle{
   font-family: var(--font);
-}
-
-
-/* A etiketi, buton, input dahil hepsi */
-:root{
-  --font: "Avenir Next", Avenir, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-}
-
-html, body, button, input, textarea, select, a{
-  font-family: var(--font) !important;
-  font-weight: 400; /* ✅ her şey normal başlasın */
-}
-
-/* ===== TEST (GELİYOR MU?) ===== */
-/* ===== CATEGORY HEADER: KESİN FIX ===== */
-.page-cat .catHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 16px 6px;
-}
-
-.page-cat .backLink {
-  align-self: flex-start;
-  display: block;          /* aynı satıra asla gelmesin */
-  position: static;
-  white-space: nowrap;
-  font-size: 13px;
-  opacity: .75;
-}
-
-.page-cat .catTitle,
-.page-cat #catTitle {
-  display: block;          /* aynı satıra asla gelmesin */
-  margin: 0;
-  text-align: center;
-  font-size: 16px;         /* başlığı küçülttük */
-  letter-spacing: 1px;
-  line-height: 1.2;
-  overflow-wrap: anywhere; /* uzunsa 2 satıra düşsün */
 }
