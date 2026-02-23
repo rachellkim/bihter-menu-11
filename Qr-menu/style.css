@@ -27,16 +27,11 @@ a {
 
 /* ========== ANA KART ========== */
 .card{
-  width: 100%;
-  max-width: 420px;
-  margin: 24px auto;
-  padding: 24px 20px;
-
-  background: rgba(255,255,255,0.35);  /* şeffaf görünüm */
+  background: rgba(255,255,255,0.35) !important;
   border: 1px solid rgba(0,0,0,0.10);
-  border-radius: 28px;
-
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 /* ========== LOGO & BAÅLIK ========== */
 .brand {
@@ -143,65 +138,47 @@ a {
 
 /* ========== ÃœRÃœN LÄ°STESÄ° ========== */
 /* ========== ÃœRÃœN LÄ°STESÄ° ========== */
-.items{
-  display: grid;
-  gap: 14px;
-}
+.items{ display: grid; gap: 14px; }
 
-/* ÜRÜN KARTI: İSİM | FİYAT | FOTO */
 .item{
-  display: grid;
-  grid-template-columns: 1fr auto 64px;  /* isim | fiyat | foto */
-  align-items: center;
-  gap: 12px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
 
-  padding: 14px;
-  border-radius: 16px;
+  padding:14px;
+  border-radius:16px;
 
-  background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(0,0,0,0.10);
+  background: rgba(255,255,255,0.35);
+  border:1px solid rgba(0,0,0,0.10);
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
 
-/* Sol taraf */
-.itemMain{
-  min-width: 0;
-}
+.itemMain{ min-width:0; }
+.itemName{ font-size:16px; font-weight:800; margin:0; }
+.itemDesc{ font-size:13px; opacity:.7; margin-top:6px; line-height:1.25rem; }
 
-.itemName{
-  font-size: 16px;
-  font-weight: 800;
-  margin: 0;
-}
-
-.itemDesc{
-  font-size: 13px;
-  color: rgba(0,0,0,0.55);
-  margin-top: 6px;
-  line-height: 1.25rem;
-}
-
-/* Sağ blok wrapper varsa bozmasın */
 .itemRight{
-  display: contents;  /* fiyat ve foto grid kolonlarına otursun */
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:8px;
+  flex-shrink:0;
 }
 
-/* Fiyat (ortadaki kolon) */
 .price{
-  font-size: 18px;
-  font-weight: 900;
-  white-space: nowrap;
+  font-size:18px;
+  font-weight:900;
+  white-space:nowrap;
 }
 
-/* Foto (sağdaki kolon) */
 .thumb{
-  width: 64px;
-  height: 64px;
-  border-radius: 12px;
-  object-fit: cover;
+  width:64px;
+  height:64px;
+  border-radius:12px;
+  object-fit:cover;
+  display:block;
   background: rgba(0,0,0,0.08);
-  display: block;
-  justify-self: end;
 }
 
 
@@ -292,3 +269,8 @@ body.page-sub::before{
   background-image: url("https://static.wixstatic.com/media/b9ef37_c915c3ee21d44b08ab08fd3665a2f04c~mv2.jpeg");
 }
 
+
+:root{
+  --font: "Avenir Next", Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+html, body { font-family: var(--font); }
