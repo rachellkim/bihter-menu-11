@@ -17,7 +17,7 @@ const MAIN_SLUGS = [
  */
 const SUB_MAP = {
   atistirmaliklar: [],
-  "sicak-kahveler": ["espresso-bazli", "aromali-ozel-kahveler", "filtreturk"],
+  "sicak-kahveler": ["espresso-bazli", "aromali-ozel-kahveler", "filtreturk","sicak-matcha"],
   "soguk-kahveler": ["sogukbazli", "soguk-matchalar", "frappeler"],
   "sicak-icecekler": [],
   "soguk-icecekler": [],
