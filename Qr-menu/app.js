@@ -45,7 +45,16 @@ function getTitle(cat) {
     ""
   );
 }
+function setSubBackgroundByMainSlug(mainSlug) {
+  // Buraya istediğin görselleri koy
+  const BG = {
+    "soguk-kahveler": 'url("https://.../soguk-bg.jpg")',
+    "sicak-kahveler": 'url("https://.../sicak-bg.jpg")',
+  };
 
+  const val = BG[mainSlug] || "";
+  if (val) document.body.style.setProperty("--sub-bg", val);
+}
 /**
  * Worker şu an coverPhoto döndürüyor:
  * coverPhoto: firstAttachmentUrl(...)
