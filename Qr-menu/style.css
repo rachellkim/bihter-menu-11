@@ -61,9 +61,10 @@ body.page-sub::before{
   .page-home .logo{
     width: 320px !important;
   }
-   .page-home .brand{
-  width: 100%;
 
+  .page-home .brand{
+    width: 100%;
+  }
 }
 
 body::after{
