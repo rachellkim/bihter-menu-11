@@ -217,6 +217,16 @@ body.page-cat::before{
 #categoryButtons a:active,
 .btn:active{ transform: scale(0.98); }
 
+/* SUB: butonları tam ortala + genişliği kontrol et */
+body.page-sub .menu-buttons{
+  justify-items: center;
+}
+body.page-sub .menu-buttons a,
+body.page-sub .btn{
+  width: 100%;
+  max-width: 360px;
+}
+
 /* ========== ITEMS ========== */
 .items{ display: grid; gap: 14px; }
 
@@ -295,7 +305,6 @@ body.page-cat::before{
 }
 
 .icon-btn:active{ transform: scale(0.95); }
-
 .icon-btn.instagram{ color: #E1306C; }
 
 /* ========== TO TOP ========== */
@@ -313,14 +322,16 @@ body.page-cat::before{
   cursor: pointer;
 }
 
-/* ===== CARD ARKA PLAN GÖRSEL (HAFİF / ŞIK) ===== */
+/* =========================================================
+   KART İÇİ OPak ARKA PLAN (HERO YOK)
+   ========================================================= */
 body.page-sub .card,
 body.page-cat .card{
   position: relative;
   overflow: hidden;
 }
 
-/* arka plan görseli */
+/* kartın arka plan resmi */
 body.page-sub .card::before,
 body.page-cat .card::before{
   content: "";
@@ -331,9 +342,9 @@ body.page-cat .card::before{
   background-size: cover;
   background-position: center;
 
-  opacity: 0.12;           /* 🔥 OPACITY AYARI */
-  filter: blur(2px);       /* hafif yumuşatma */
-  transform: scale(1.05);
+  opacity: 0.10;     /* 0.08–0.15 arası oynat */
+  filter: blur(3px);
+  transform: scale(1.1);
 
   z-index: 0;
 }
@@ -343,51 +354,4 @@ body.page-sub .card > *,
 body.page-cat .card > *{
   position: relative;
   z-index: 1;
-}
-
-/* ===== CARD İÇİNE ARKA PLAN (KATI GARANTİ) ===== */
-body.page-sub .card,
-body.page-cat .card{
-  position: relative !important;
-  overflow: hidden !important;
-
-  /* kartın kendi beyazını kapat ki görsel görünsün */
-  background: transparent !important;
-}
-
-/* 1) Görsel katmanı */
-body.page-sub .card::before,
-body.page-cat .card::before{
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-
-  background-image: url("https://static.wixstatic.com/media/b9ef37_d2f5aa4eb3c54500a2af1030b1a315b6~mv2.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  opacity: 0.35;          /* 👈 görselin gücü (0.25–0.45 arası dene) */
-  filter: blur(0px);      /* blur istemezsen 0px bırak */
-  transform: scale(1.05);
-
-  z-index: 0;
-}
-
-/* 2) Üstüne şeffaf beyaz katman (yazılar net kalsın) */
-body.page-sub .card::after,
-body.page-cat .card::after{
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-
-  background: rgba(255,255,255,0.60);  /* 👈 opaklık burada */
-  z-index: 1;
-}
-
-/* 3) Kart içeriği en üstte */
-body.page-sub .card > *,
-body.page-cat .card > *{
-  position: relative !important;
-  z-index: 2 !important;
 }
