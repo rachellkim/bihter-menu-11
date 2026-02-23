@@ -265,15 +265,31 @@ body.page-cat::before{
 /* ========== FOOTER ========== */
 .footer{
   display: flex;
-  justify-content: space-between;
-  padding-top: 10px;
-  margin-top: 10px;
-  border-top: 1px solid rgba(0,0,0,0.08);
+  justify-content: center;
+  gap: 22px;
 }
 
 .icon-btn{
-  font-size: 24px;
-  padding: 10px 14px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.65);
+  color: #444;
+  transition: transform .15s ease, background .15s ease;
+}
+.icon-btn svg{
+  width: 22px;
+  height: 22px;
+}
+.icon-btn:active{
+  transform: scale(0.95);
+}
+
+/* Instagram'a hafif vurgu (opsiyonel ama çok hoş) */
+.icon-btn.instagram{
+  color: #E1306C; /* Instagram pembe */
 }
 
 /* ========== YUKARI ÇIK BUTONU ========== */
