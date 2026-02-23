@@ -292,10 +292,7 @@ body.page-cat::before{
   color: #444;
   transition: transform .15s ease, background .15s ease;
 }
-.icon-btn svg{
-  width: 22px;
-  height: 22px;
-}
+.icon-btn svg { width: 22px; height: 22px; display:block; }
 .icon-btn:active{
   transform: scale(0.95);
 }
