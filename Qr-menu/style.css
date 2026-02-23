@@ -118,24 +118,30 @@ body.page-cat::before{
 }
 
 /* ========== KATEGORİ HEADER ========== */
-.catHeader{
-  position: relative;
-  text-align: center;
-  margin-bottom: 14px;
-}
+/* ========== MOBIL HEADER FIX ========== */
+@media (max-width: 480px) {
 
-.backLink{
-  position: absolute;
-  left: 0;
-  top: 2px;
-  font-weight: 600;
-  color: rgba(0,0,0,0.6);
-}
+  .catHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding-top: 6px;
+  }
 
-.catTitle{
-  font-size: 20px;     /* 22 -> 20 (opsiyonel) */
-  letter-spacing: 2px; /* 3 -> 2 */
-  font-weight: 600;    /* 800 -> 600 */
+  .backLink {
+    position: static;          /* absolute'i kapat */
+    align-self: flex-start;    /* sola yasla */
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  .catTitle {
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-top: 2px;
+    text-align: center;
+  }
 }
 
 /* ========== ANA BUTONLAR (HOME / SUB) ========== */
@@ -270,3 +276,9 @@ html, body, button, input, textarea, select, a{
   font-family: var(--font) !important;
   font-weight: 400; /* ✅ her şey normal başlasın */
 }
+
+
+
+
+
+
