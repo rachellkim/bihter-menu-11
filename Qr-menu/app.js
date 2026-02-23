@@ -1,7 +1,7 @@
 // ===== CONFIG =====
 const API_URL = "/api/menu";
 
-// Ana sayfada görünecek 6 ANA kategori slug'ı (Airtable slug(text))
+// Ana sayfada görünecek ana kategori slug'ları (Airtable slug(text))
 const MAIN_SLUGS = [
   "tatlilar",
   "soguk-kahveler",
@@ -13,25 +13,24 @@ const MAIN_SLUGS = [
 
 /**
  * ANA -> ALT kategori eşlemesi (Airtable slug'larıyla)
- * Örn: "sicak-kahveler" tıklanınca 3 alt kategori butonu gösterecek.
+ * Alt kategorisi olmayanlarda [] bırak.
  */
 const SUB_MAP = {
- " atistirmaliklar": [],
+  atistirmaliklar: [],
   "sicak-kahveler": ["espresso-bazli", "aromali-ozel-kahveler", "filtreturk"],
   "soguk-kahveler": ["sogukbazli", "soguk-matchalar", "frappeler"],
   "sicak-icecekler": [],
   "soguk-icecekler": [],
-  "tatlilar": [],
+  tatlilar: [],
 };
 
 // ===== HELPERS =====
 const qs = (k) => new URLSearchParams(location.search).get(k) || "";
 
 function normTR(s) {
-  return String(s || "").trim();
+  return String(s ?? "").trim();
 }
 
-// Airtable/worker'dan gelebilecek alan isimleri farklı olabiliyor: güvenli okuma
 function getSlug(cat) {
   return cat?.slug || cat?.slugText || cat?.["slug(text)"] || cat?.["slug"] || "";
 }
@@ -47,9 +46,13 @@ function getTitle(cat) {
   );
 }
 
-// Kapak foto (kategori üstü görsel) — Airtable attachment array olabileceği için [0].url destekli
+/**
+ * Worker şu an coverPhoto döndürüyor:
+ * coverPhoto: firstAttachmentUrl(...)
+ */
 function getHeroUrl(cat) {
   const v =
+    cat?.coverPhoto ||
     cat?.coverUrl ||
     cat?.coverPhotoUrl ||
     cat?.heroUrl ||
@@ -58,7 +61,6 @@ function getHeroUrl(cat) {
     cat?.cover ||
     "";
 
-  // attachment array ise
   if (Array.isArray(v)) return v?.[0]?.url || "";
   if (typeof v === "object" && v) return v?.url || "";
   return v || "";
@@ -67,10 +69,28 @@ function getHeroUrl(cat) {
 function formatPrice(p) {
   const s = String(p ?? "").trim();
   if (!s) return "";
-  // "180" -> "180₺"
   if (/^\d+([.,]\d+)?$/.test(s)) return s.replace(",", ".") + "₺";
-  // "180₺" zaten öyleyse dokunma
   return s;
+}
+
+/**
+ * Ürün görseli: Worker image döndürüyor ama eski alan adlarını da destekleyelim.
+ */
+function getProductImage(it) {
+  const v =
+    it?.image ||
+    it?.photoUrl ||
+    it?.imageUrl ||
+    it?.imgUrl ||
+    it?.photo ||
+    it?.["Ürün Fotoğrafı"] ||
+    it?.["Urun Fotograf"] ||
+    it?.urunFotografi ||
+    "";
+
+  if (Array.isArray(v)) return v?.[0]?.url || "";
+  if (typeof v === "object" && v) return v?.url || "";
+  return v || "";
 }
 
 function setHero(cat) {
@@ -106,21 +126,13 @@ function findCategory(data, slug) {
   return cats.find((c) => getSlug(c) === slug) || null;
 }
 
-// Ürün fotoğrafı: Airtable attachment array desteği
-function getProductImage(it) {
-  // 1) Airtable attachment field (array)
-  const a =
-    it?.["Ürün Fotoğrafı"] ||
-    it?.["Urun Fotograf"] ||
-    it?.urunFotografi ||
-    it?.photo ||
-    it?.image;
-
-  if (Array.isArray(a)) return a?.[0]?.url || "";
-  if (typeof a === "object" && a) return a?.url || "";
-
-  // 2) düz url alanları
-  return it?.photoUrl || it?.imageUrl || it?.imgUrl || it?.image || "";
+function sortItemsSafe(items) {
+  // Worker artık Sira’ya göre gönderiyor ama güvenlik için:
+  return [...(items || [])].sort((a, b) => {
+    const ax = Number(a?.Sira ?? a?.["Sira"] ?? a?.["Sıra"] ?? a?.order ?? a?.Order ?? 999999);
+    const bx = Number(b?.Sira ?? b?.["Sira"] ?? b?.["Sıra"] ?? b?.order ?? b?.Order ?? 999999);
+    return ax - bx;
+  });
 }
 
 // ===== RENDER: MAIN INDEX =====
@@ -128,7 +140,6 @@ function renderIndex(data) {
   const box = document.getElementById("categoryButtons");
   if (!box) return;
 
-  // sırayla sadece MAIN_SLUGS göster
   const catsBySlug = new Map((data?.categories || []).map((c) => [getSlug(c), c]));
 
   box.innerHTML = "";
@@ -139,7 +150,6 @@ function renderIndex(data) {
     const title = getTitle(cat);
     const hasSubs = Array.isArray(SUB_MAP[slug]) && SUB_MAP[slug].length > 0;
 
-    // /sub.html, /category/ (category/index.html)
     const href = hasSubs
       ? `/sub.html?main=${encodeURIComponent(slug)}`
       : `/category/?cat=${encodeURIComponent(slug)}`;
@@ -169,7 +179,6 @@ function renderSub(data) {
   const subs = SUB_MAP[mainSlug] || [];
   box.innerHTML = "";
 
-  // Eğer alt kategori listesi boşsa: direkt ana kategoriyi aç
   if (!subs.length) {
     location.href = `/category/?cat=${encodeURIComponent(mainSlug)}`;
     return;
@@ -200,27 +209,18 @@ function renderCategory(data) {
     return;
   }
 
-  setHero(cat);
+  // başlık + hero
   if (titleEl) titleEl.textContent = normTR(getTitle(cat));
+  setHero(cat);
 
-const items = [...(cat?.items || [])].sort((a, b) => {
-  const ax = Number(a?.["Sira"] ?? a?.["Sıra"] ?? a?.Sira ?? 999999);
-  const bx = Number(b?.["Sira"] ?? b?.["Sıra"] ?? b?.Sira ?? 999999);
-  return ax - bx;
-});
+  // ürünler
+  const items = sortItemsSafe(cat?.items || []);
+  itemsBox.innerHTML = "";
 
-  
   for (const it of items) {
-    const name = it?.["Ürün Adı"] || it?.["Urun Adi"] || it?.name || "";
-    const desc =
-      it?.["Açıklama TR"] ||
-      it?.["Aciklama TR"] ||
-      it?.descTR ||
-      it?.desc ||
-      "";
-    const price = formatPrice(
-      it?.price || it?.["Fiyat"] || it?.["Price"] || it?.priceText || ""
-    );
+    const name = normTR(it?.name || it?.["Ürün Adı"] || it?.["Urun Adi"] || "");
+    const desc = normTR(it?.desc || it?.descTR || it?.["Açıklama TR"] || it?.["Aciklama TR"] || "");
+    const price = formatPrice(it?.price || it?.priceText || it?.["Fiyat"] || it?.["Price"] || "");
     const imgUrl = getProductImage(it);
 
     const card = document.createElement("article");
@@ -233,6 +233,7 @@ const items = [...(cat?.items || [])].sort((a, b) => {
       ${desc ? `<p class="itemDesc">${desc}</p>` : ""}
     `;
 
+    // Sağ taraf wrapper (CSS'te display:contents yapıyoruz)
     const right = document.createElement("div");
     right.className = "itemRight";
 
@@ -246,6 +247,7 @@ const items = [...(cat?.items || [])].sort((a, b) => {
       const img = document.createElement("img");
       img.className = "thumb";
       img.alt = name;
+      img.loading = "lazy";
       img.src = imgUrl;
       right.appendChild(img);
     }
@@ -281,10 +283,8 @@ function setupToTop() {
 (async function init() {
   try {
     setupToTop();
-
     const data = await getMenu();
 
-    // hangi sayfadaysak ona göre render
     renderIndex(data);
     renderSub(data);
     renderCategory(data);
@@ -294,7 +294,8 @@ function setupToTop() {
       document.getElementById("categoryButtons") ||
       document.getElementById("subButtons") ||
       document.getElementById("items");
-    if (box)
+    if (box) {
       box.innerHTML = `<p style="text-align:center; color:#a00;">Yüklenemedi. (API / veri hatası)</p>`;
+    }
   }
 })();
