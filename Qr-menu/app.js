@@ -21,7 +21,7 @@ const SUB_MAP = {
   "soguk-kahveler": ["sogukbazli", "soguk-matchalar", "frappeler"],
   "sicak-icecekler": [],
   "soguk-icecekler": [],
-  tatlilar: [],
+  "tatlilar": [],
 };
 
 // ===== HELPERS =====
