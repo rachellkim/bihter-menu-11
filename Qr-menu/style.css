@@ -246,3 +246,9 @@ body.page-cat::before{
 .catTitle {
   font-family: var(--font);
 }
+
+
+/* A etiketi, buton, input dahil hepsi */
+html, body, button, input, textarea, select, a {
+  font-family: var(--font) !important;
+}
