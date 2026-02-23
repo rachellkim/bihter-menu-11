@@ -388,3 +388,7 @@ body.page-sub .menu-buttons,
 body.page-sub #subs{
   width: 100%;
 }
+/* Screen artık kartı sıkıştırmasın */
+body.page-sub .screen{
+  display: block;
+}
