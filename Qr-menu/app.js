@@ -9,6 +9,7 @@ const MAIN_SLUGS = [
   "sicak-kahveler",
   "soguk-icecekler",
   "atistirmaliklar",
+  "sicak-matcha",
 ];
 
 /**
