@@ -231,9 +231,18 @@ body.page-cat::before{
   border-radius: 18px;
   object-fit: cover;
   object-position: center;
+   font-family: var(--font);
 }
 
 /* Çok uzun dikey foto gelirse: kartı bozmasın */
 .hero.is-visible{
   max-height: 320px;     /* istersen 260-380 arası oynat */
+}
+
+.btn,
+.menu-buttons,
+.menu-wrap,
+.heroText,
+.catTitle {
+  font-family: var(--font);
 }
