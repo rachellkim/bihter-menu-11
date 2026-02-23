@@ -119,15 +119,7 @@ body.page-cat::before{
 
 /* ========== KATEGORİ HEADER ========== */
 /* ========== MOBIL HEADER FIX ========== */
-@media (max-width: 480px) {
 
-  .catHeader {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    padding-top: 6px;
-  }
 
   .backLink {
     position: static;          /* absolute'i kapat */
