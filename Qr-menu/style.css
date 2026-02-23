@@ -330,3 +330,5 @@ body.page-cat::before{
 @media (max-width: 600px){
   .hero{ height: 140px; }
 }
+
+body { outline: 12px solid lime !important; }
