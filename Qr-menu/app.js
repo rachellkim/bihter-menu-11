@@ -48,11 +48,12 @@ function getTitle(cat) {
 }
 
 /**
- * ✅ KART İÇİ OPak ARKAPLAN (HERO YOK)
- * CSS: .card::before { background-image: var(--card-bg-img, none); opacity: ... }
+ * ✅ ARKAPLANLAR (BODY + KART)
+ * CSS:
+ *  - body.page-sub::before { background-image: var(--sub-bg, none); }
+ *  - .card::before { background-image: var(--card-bg-img, none); }
  */
-function setCardBgByMainSlug(mainSlug) {
-  // buraya kendi görsellerini koy
+function setBgsBySlug(slug) {
   const BG_MAP = {
     "soguk-kahveler": "https://static.wixstatic.com/media/b9ef37_d2f5aa4eb3c54500a2af1030b1a315b6~mv2.jpg",
     "sicak-kahveler": "https://static.wixstatic.com/media/b9ef37_d2f5aa4eb3c54500a2af1030b1a315b6~mv2.jpg",
@@ -66,10 +67,14 @@ function setCardBgByMainSlug(mainSlug) {
   const fallback =
     "https://static.wixstatic.com/media/b9ef37_d2f5aa4eb3c54500a2af1030b1a315b6~mv2.jpg";
 
-  const url = BG_MAP[mainSlug] || fallback;
+  const url = BG_MAP[slug] || fallback;
 
-  // CSS değişkenini set et
+  // ✅ Kart içi opak arka plan
   document.documentElement.style.setProperty("--card-bg-img", `url("${url}")`);
+
+  // ✅ Sub sayfasının blur body background’u
+  // Not: sadece page-sub’da etkili (CSS öyle)
+  document.documentElement.style.setProperty("--sub-bg", `url("${url}")`);
 }
 
 function formatPrice(p) {
@@ -146,6 +151,7 @@ function renderIndex(data) {
   }
 }
 
+// ===== RENDER: SUB PAGE =====
 function renderSub(data) {
   const box = document.getElementById("subButtons");
   const titleEl = document.getElementById("subTitle");
@@ -159,11 +165,11 @@ function renderSub(data) {
     return;
   }
 
-  // ✅ BAŞLIK BURADA SET EDİLİYOR
+  // ✅ Başlık
   if (titleEl) titleEl.textContent = getTitle(mainCat);
 
-  // ✅ kart arka planı
-  setCardBgByMainSlug(mainSlug);
+  // ✅ Hem body blur bg hem kart içi bg
+  setBgsBySlug(mainSlug);
 
   const subs = SUB_MAP[mainSlug] || [];
   box.innerHTML = "";
@@ -202,9 +208,9 @@ function renderCategory(data) {
   // başlık
   if (titleEl) titleEl.textContent = normTR(getTitle(cat));
 
-  // ✅ kategori sayfasında da kart arka planı istiyorsan:
-  // (Burada "main slug" yok, direkt kendi slug'ını verelim)
-  setCardBgByMainSlug(slug);
+  // ✅ Kategori sayfası kart içi bg
+  // (slug bir main slug ise direkt map'ten bulur; değilse fallback)
+  setBgsBySlug(slug);
 
   // ürünler
   const items = sortItemsSafe(cat?.items || []);
