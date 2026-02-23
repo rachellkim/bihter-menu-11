@@ -1,4 +1,3 @@
-
 /* ========== RESET ========== */
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; padding: 0; }
@@ -41,11 +40,7 @@ body.page-sub::before{
   transform: scale(1.05);
   z-index: -2;
 }
-@media (min-width: 900px){
-  body.page-sub .card.wide{
-    max-width: 680px;
-  }
-}
+
 /* overlay */
 body::after{
   content:"";
@@ -66,7 +61,7 @@ body.page-sub::before{
   background-image: var(--sub-bg, none);
 }
 
-/* Category background (default = same as home; istersen ayrı görsel koyarsın) */
+/* Category background (default = same as home) */
 body.page-cat::before{
   background-image: url("https://static.wixstatic.com/media/b9ef37_d2f5aa4eb3c54500a2af1030b1a315b6~mv2.jpg");
 }
@@ -93,6 +88,13 @@ body.page-cat::before{
 
 .card.wide{ max-width: 520px; }
 
+/* Desktop'ta SUB kartı büyüt */
+@media (min-width: 900px){
+  body.page-sub .card.wide{
+    max-width: 680px;
+  }
+}
+
 /* ========== BRAND / LOGO ========== */
 .brand{ text-align: center; }
 
@@ -103,7 +105,7 @@ body.page-cat::before{
   display: block;
 }
 
-/* Ana sayfa logo büyük */
+/* Ana sayfa logo büyük + animasyon */
 .page-home .logo{
   width: 300px !important;
   max-width: 90vw;
@@ -111,11 +113,17 @@ body.page-cat::before{
   margin: 10px auto 18px;
   display: block;
   filter: drop-shadow(0 10px 22px rgba(0,0,0,0.25));
+  animation: logoIn .6s ease-out both;
 }
 
 @media (max-width: 600px){
   .page-home .logo{ width: 320px !important; }
   .page-home .brand{ width: 100%; }
+}
+
+@keyframes logoIn{
+  from{ opacity: 0; transform: translateY(-6px); }
+  to{ opacity: 1; transform: none; }
 }
 
 .tagline{
@@ -305,29 +313,20 @@ body.page-cat::before{
   cursor: pointer;
 }
 
-/* ========== SUB HERO ========== */
+/* ========== SUB HERO (BANNER) ========== */
 .hero{
   width: 100%;
-  height: 160px;          /* 🔥 kontrol burada */
+  height: 160px;          /* banner kontrol */
   border-radius: 18px;
-  object-fit: cover;      /* kırpar ama taşmaz */
+  object-fit: cover;
   object-position: center;
   display: block;
   margin: 0 auto 14px;
 }
-.hero.is-visible{ max-height: 320px; }
+
+/* eski class varsa sorun çıkarmasın */
+.hero.is-visible{ max-height: none; }
+
 @media (max-width: 600px){
-  .hero{
-    height: 140px;
-  }
-}
-
-/* === HOME LOGO: hafif animasyon (premium) === */
-.page-home .logo{
-  animation: logoIn .6s ease-out both;
-}
-
-@keyframes logoIn{
-  from{ opacity: 0; transform: translateY(-6px); }
-  to{ opacity: 1; transform: none; }
+  .hero{ height: 140px; }
 }
