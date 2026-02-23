@@ -316,11 +316,13 @@ body.page-cat::before{
 /* ========== SUB HERO (BANNER) ========== */
 /* ===== HERO: DİKDÖRTGEN & ŞIK ===== */
 /* ALT KATEGORİ HERO FOTO */
+/* HERO: bardak görünsün diye kadrajı aşağı al */
 body.page-sub .hero{
   width: 100%;
-  height: 220px;          /* 🔥 dikdörtgen */
+  height: 220px;
   border-radius: 20px;
   object-fit: cover;
+  object-position: center 65%;  /* 🔥 50% orta, 70% daha aşağı */
   display: block;
   margin-bottom: 18px;
 }
@@ -328,6 +330,7 @@ body.page-sub .hero{
 @media (max-width: 600px){
   body.page-sub .hero{
     height: 180px;
+    object-position: center 70%;
   }
 }
 /* ===== SUB PAGE: KART UZUN / FULL GÖRÜNSÜN ===== */
@@ -351,8 +354,3 @@ body.page-sub .btn{
   text-align: center;
 }
 /* HERO: üst kısmı göster (kesik gibi durmasın) */
-body.page-sub img.hero{
-  object-position: center top !important;
-   object-fit: contain !important;
-  background: rgba(255,255,255,0.35);
-}
