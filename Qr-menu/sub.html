@@ -4,27 +4,28 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Alt Kategoriler</title>
-<meta http-equiv="Cache-Control" content="no-store" />
-<link rel="stylesheet" href="/style.css">
-<script src="/app.js"></script>
+
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <link rel="stylesheet" href="/style.css?v=20260223-301">
+  <script src="/app.js?v=20260223-301" defer></script>
 </head>
 
 <body class="page-sub">
-  <button id="toTopBtn" class="toTop" type="button" aria-label="Yukarı çık">
-    <span>⌃</span>
-  </button>
+  <button id="toTopBtn" class="toTop" type="button" aria-label="Yukarı çık">⌃</button>
 
   <main class="screen">
-    <section class="card">
-      <header class="brand">
+    <section class="card wide">
       
-        
-        <div class="divider"></div>
+      <!-- ✅ BAŞLIK GERİ GELDİ -->
+      <header class="catHeader">
+        <a class="backLink" href="/" aria-label="Geri">← Menü</a>
+        <h1 id="subTitle" class="catTitle"></h1>
       </header>
+
+      <div class="divider small"></div>
 
       <nav id="subButtons" class="menu-buttons" aria-label="Alt kategoriler"></nav>
 
-      
     </section>
   </main>
 </body>
