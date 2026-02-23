@@ -313,37 +313,35 @@ body.page-cat::before{
   cursor: pointer;
 }
 
-/* ========== SUB HERO (BANNER) ========== */
-/* ===== HERO: DİKDÖRTGEN & ŞIK ===== */
-/* ALT KATEGORİ HERO FOTO */
-/* HERO: bardak görünsün diye kadrajı aşağı al */
-/* ===== SUB HERO — BARDAK ÜSTÜ GÖRÜNSÜN ===== */
-/* ===== SUB HERO — BARDAK ÜSTÜ GÖRÜNSÜN (İNCE AYAR) ===== */
-/* ===== SUB HERO — BARDAK ÜSTÜ GÖRÜNSÜN ===== */
-body.page-sub .hero{
-  width: 100%;
-  height: 220px;
-  border-radius: 20px;
-
-  object-fit: cover;
-  object-position: center 75%; /* 🔥 kritik satır */
-
-  display: block;
-  margin-bottom: 18px;
+/* ===== CARD ARKA PLAN GÖRSEL (HAFİF / ŞIK) ===== */
+body.page-sub .card,
+body.page-cat .card{
+  position: relative;
+  overflow: hidden;
 }
 
-@media (max-width: 600px){
-  body.page-sub .hero{
-    height: 180px;
-    object-position: center 78%;
-  }
+/* arka plan görseli */
+body.page-sub .card::before,
+body.page-cat .card::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: url("https://static.wixstatic.com/media/b9ef37_d2f5aa4eb3c54500a2af1030b1a315b6~mv2.jpg");
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0.12;           /* 🔥 OPACITY AYARI */
+  filter: blur(2px);       /* hafif yumuşatma */
+  transform: scale(1.05);
+
+  z-index: 0;
 }
 
-body.page-sub .menu-buttons{
-  justify-items: center;
+/* kart içeriği üstte kalsın */
+body.page-sub .card > *,
+body.page-cat .card > *{
+  position: relative;
+  z-index: 1;
 }
 
-body.page-sub .menu-buttons a{
-  width: 100%;
-  max-width: 360px;
-}
