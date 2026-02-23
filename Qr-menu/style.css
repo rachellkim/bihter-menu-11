@@ -339,3 +339,20 @@ body.page-sub .screen{
 body.page-sub .card{
   min-height: calc(100vh - 48px); /* 🔥 kart uzar */
 }
+/* SUB: butonları tam ortala */
+body.page-sub .menu-buttons{
+  justify-items: center;   /* grid içindeki elemanları ortala */
+}
+
+body.page-sub .menu-buttons a,
+body.page-sub .btn{
+  width: 100%;
+  max-width: 360px;        /* ortada dursun, çok uzamasın */
+  text-align: center;
+}
+/* HERO: üst kısmı göster (kesik gibi durmasın) */
+body.page-sub img.hero{
+  object-position: center top !important;
+   object-fit: contain !important;
+  background: rgba(255,255,255,0.35);
+}
